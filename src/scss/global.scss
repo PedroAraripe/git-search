@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    & * {
+        box-sizing: border-box;
+    }
+}
+
+.router-link-exact-active {
+    color: #42b983;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
