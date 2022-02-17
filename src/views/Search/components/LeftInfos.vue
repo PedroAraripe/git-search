@@ -22,12 +22,12 @@
   </div>
 </template>
 <script>
+// import axios from "axios";
+
 export default {
-  props: {
-    user: {
-      type: Object,
-      required: false,
-      default: () => {},
+  computed: {
+    user() {
+      return this.$store.state.user;
     },
   },
 };

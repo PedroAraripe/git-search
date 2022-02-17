@@ -1,46 +1,53 @@
 <template>
   <div class="search-page">
-    <LeftInfos :user="user" />
+    <LeftInfos v-if="user" :user="user" />
     <div>
-      <h1>This is an Search page</h1>
-
-      <div v-if="user">{{ userNameShowing }}</div>
+      <div v-if="user">
+        <div v-for="repo in userRepos" :key="repo.id">
+          <ProjectCard :project="repo" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
 import LeftInfos from "./components/LeftInfos.vue";
+import ProjectCard from "./components/ProjectCard.vue";
 
 export default {
   components: {
     LeftInfos,
+    ProjectCard,
   },
   data() {
     return {
-      user: {},
       errors: false,
     };
   },
   mounted() {
-    this.getUserInfo();
+    if (!this.user && this.$route.query.name) {
+      this.$store.dispatch("fetchUser", this.$route.query.name);
+    }
+
+    this.getUserRepos();
   },
   methods: {
-    getUserInfo() {
-      const userGit = this.$route.query.name;
+    getUserRepos() {
       axios
-        .get(`https://api.github.com/users/${userGit}`)
-        .then((data) => (this.user = data.data))
-        .then(this.getUserRepos)
-        .catch(() => (this.errors = true));
-    },
-    getUserRepos(user) {
-      axios.get(user.repos_url).then((data) => (this.userRepos = data.data));
+        .get(this.user.repos_url)
+        .then((data) => this.$store.commit("setUserRepos", data.data));
     },
   },
   computed: {
     userNameShowing() {
       return this.user.name ?? this.user.login;
+    },
+    user() {
+      return this.$store.state.user;
+    },
+    userRepos() {
+      return this.$store.state.userRepos;
     },
   },
 };
