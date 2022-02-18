@@ -1,7 +1,7 @@
 <template>
   <section>
     <main>
-      <MovingText class="relative"> </MovingText>
+      <MovingText class="moving-texts"> </MovingText>
       <CardWrapperLogin class="card-wrapper-login">
         <form @submit.prevent="setUser(searchInput)">
           <h1>Search for a git login name</h1>
@@ -58,16 +58,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 section {
-  /* TODO
-   - -- - -- - - -- - make it global  -- - - - -- - - - - */
-  .relative {
-    position: relative;
+  position: relative;
+  overflow: hidden;
+
+  .moving-texts {
+    position: absolute;
+    z-index: 0;
   }
 
   .card-wrapper-login {
-    position: absolute;
-    top: 0;
-    left: 0;
+    z-index: 1;
   }
 
   min-height: 100vh;
