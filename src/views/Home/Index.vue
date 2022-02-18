@@ -1,23 +1,34 @@
 <template>
   <section>
-    <aside>developers login names here moving</aside>
     <main>
-      <form @submit.prevent="setUser(searchInput)">
-        <h1>Search for a git login name</h1>
-        <input
-          v-model="search"
-          id="searchInput"
-          name="searchInput"
-          type="text"
-          required
-        />
-        <button>Search</button>
-      </form>
+      <MovingText class="relative"> </MovingText>
+      <CardWrapperLogin class="card-wrapper-login">
+        <form @submit.prevent="setUser(searchInput)">
+          <h1>Search for a git login name</h1>
+          <div>
+            <input
+              v-model="search"
+              id="searchInput"
+              name="searchInput"
+              type="text"
+              required
+            />
+            <button>Search</button>
+          </div>
+        </form>
+      </CardWrapperLogin>
     </main>
   </section>
 </template>
 <script>
+import MovingText from "./MovingText.vue";
+import CardWrapperLogin from "./CardWrapperLogin.vue";
+
 export default {
+  components: {
+    MovingText,
+    CardWrapperLogin,
+  },
   data() {
     return {
       search: "",
@@ -47,31 +58,38 @@ export default {
 </script>
 <style lang="scss" scoped>
 section {
-  display: grid;
-  grid-template-columns: 50vw 50vw;
+  /* TODO
+   - -- - -- - - -- - make it global  -- - - - -- - - - - */
+  .relative {
+    position: relative;
+  }
+
+  .card-wrapper-login {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
   min-height: 100vh;
   background-color: rgb(10, 10, 10);
 
-  & > * {
-    padding: 1rem;
-  }
-
   & main {
-    background-color: #272a37;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  & aside {
-    background-color: black;
-    color: white;
+    height: 100vh;
+    max-width: 100vw;
+    overflow: hidden;
+
+    background-color: #272a37;
   }
 }
 
 form {
-  height: 100%;
-
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: center;
   justify-content: center;
 
   & > h1 {
@@ -80,10 +98,15 @@ form {
     margin-bottom: 1.3rem;
   }
 
-  & > input {
+  & input {
     height: 3rem;
-    width: 50%;
-    max-width: 400px;
+    width: 80%;
+
+    @media (min-width: 768px) {
+      min-width: 300px;
+      max-width: 50%;
+      margin-right: 2rem;
+    }
 
     padding: 1rem;
     margin-bottom: 2.5rem;
@@ -95,7 +118,7 @@ form {
     color: ghostwhite;
   }
 
-  & > button {
+  & button {
     min-width: 150px;
 
     padding: 1rem 2rem;
@@ -105,9 +128,9 @@ form {
 
     cursor: pointer;
 
-    background-color: #1d90f5;
-    color: ghostwhite;
-    border: none;
+    background-color: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #f0f6fc1a;
     border-radius: 20px;
   }
 }
