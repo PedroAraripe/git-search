@@ -142,7 +142,7 @@ form {
     transition: all .3s;
 
     &:hover {
-      background-color: #64ffda1a;
+      background-color: #2d534a;
       box-shadow: 0 0 30px hsl(215deg 30% 23%);
     }
   }
