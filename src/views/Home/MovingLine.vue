@@ -46,7 +46,7 @@ export default {
     font-size: 1.5rem;
     
     & > :not(:last-child) {
-      margin-right: .5rem;
+      margin-right: 1rem;
     }
     
     @media (min-width: 768px) {
@@ -56,14 +56,14 @@ export default {
 }
 
 .line1 {
-  animation: loop-animate 20s linear infinite;
-  animation-delay: -10s;
+  animation: loop-animate 80s linear infinite;
+  animation-delay: -40s;
 }
 
 .line2 {
   position: absolute;
-  animation: loop-animate2 20s linear infinite;
-  animation-delay: -20s;
+  animation: loop-animate2 80s linear infinite;
+  animation-delay: -80s;
 }
 
 @keyframes loop-animate {

@@ -1,9 +1,9 @@
 <template>
   <section>
     <main>
-      <MovingText class="moving-texts"> </MovingText>
+      <MovingText v-if="hasVueContributorsNames" class="moving-texts" />
       <CardWrapperLogin class="card-wrapper-login">
-        <form @submit.prevent="getUserInfo">
+        <form @submit.prevent="fetchUser">
           <h1>Search for a git login name</h1>
           <div>
             <input v-model="search" type="text" required />
@@ -28,6 +28,17 @@ export default {
       search: "",
     };
   },
+  computed: {
+    vueContributorsNames() {
+      return this.$store.state.vueContributorsNames;
+    },
+    hasVueContributorsNames(){
+      return this.vueContributorsNames?.length > 0; 
+    }
+  },
+  created(){
+    this.fetchVueContributors();
+  },
   methods: {
     setUser() {
       this.$store.commit("fetchUser", this.search);
@@ -40,13 +51,16 @@ export default {
         },
       });
     },
-    getUserInfo() {
+    fetchUser() {
       this.$store
         .dispatch("fetchUser",this.search)
         .then(this.sendToSearchPage)
         .catch(() => console.log("Nonexistent account"));
       // .then(this.getUserRepos);
     },
+    fetchVueContributors(){
+      this.$store.dispatch("fetchVueContributors");
+    }
   },
 };
 </script>

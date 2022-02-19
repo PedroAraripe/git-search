@@ -13,6 +13,7 @@ export default new Vuex.Store({
   state: {
     user: null,
     userRepos: null,
+    vueContributorsNames: null,
   },
   mutations: {
     setUser(state, payload) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     setUserRepos(state, payload) {
       state.userRepos = payload;
+    },
+    setVueContributorsNames(state, payload) {
+      state.vueContributorsNames = payload;
     },
   },
   actions: {
@@ -33,7 +37,17 @@ export default new Vuex.Store({
             .get(data.repos_url)
             .then(({ data: repos }) => commit("setUserRepos", repos));
         });
-      // .then((response) => commit("setUserRepos", ))
+    },
+    fetchVueContributors({ commit }) {
+      return axios
+        .get("https://api.github.com/repos/vuejs/vue/contributors")
+        .then(({ data }) =>{
+          commit(
+            "setVueContributorsNames",
+            data.map((c) => c.login)
+          )
+        }
+        );
     },
   },
   modules: {},
