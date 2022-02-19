@@ -11,7 +11,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import LeftInfos from "./components/LeftInfos.vue";
 import ProjectCard from "./components/ProjectCard.vue";
 
@@ -30,14 +29,6 @@ export default {
       this.$store.dispatch("fetchUser", this.$route.query.name);
     }
 
-    this.getUserRepos();
-  },
-  methods: {
-    getUserRepos() {
-      axios
-        .get(this.user.repos_url)
-        .then((data) => this.$store.commit("setUserRepos", data.data));
-    },
   },
   computed: {
     userNameShowing() {

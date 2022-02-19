@@ -3,16 +3,10 @@
     <main>
       <MovingText class="moving-texts"> </MovingText>
       <CardWrapperLogin class="card-wrapper-login">
-        <form @submit.prevent="setUser(searchInput)">
+        <form @submit.prevent="getUserInfo">
           <h1>Search for a git login name</h1>
           <div>
-            <input
-              v-model="search"
-              id="searchInput"
-              name="searchInput"
-              type="text"
-              required
-            />
+            <input v-model="search" type="text" required />
             <button>Search</button>
           </div>
         </form>
@@ -35,8 +29,8 @@ export default {
     };
   },
   methods: {
-    setUser(val) {
-      this.$store.commit("fetchUser", val);
+    setUser() {
+      this.$store.commit("fetchUser", this.search);
     },
     sendToSearchPage() {
       this.$router.push({
@@ -48,7 +42,7 @@ export default {
     },
     getUserInfo() {
       this.$store
-        .dispatch("fetchUser")
+        .dispatch("fetchUser",this.search)
         .then(this.sendToSearchPage)
         .catch(() => console.log("Nonexistent account"));
       // .then(this.getUserRepos);

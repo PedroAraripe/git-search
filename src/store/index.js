@@ -24,10 +24,16 @@ export default new Vuex.Store({
   },
   actions: {
     fetchUser({ commit }, payload) {
-      console.log(payload)
       return axios
         .get(`https://api.github.com/users/${payload}`)
-        .then((response) => commit("setUser", response.data));
+        .then(({ data }) => {
+          commit("setUser", data);
+
+          axios
+            .get(data.repos_url)
+            .then(({ data: repos }) => commit("setUserRepos", repos));
+        });
+      // .then((response) => commit("setUserRepos", ))
     },
   },
   modules: {},
