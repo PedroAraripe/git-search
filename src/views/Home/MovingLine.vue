@@ -34,7 +34,7 @@ export default {
 .line-wrapper {
   display: flex;
   position: relative;
-  height: 100px;
+  height: fit-content;
   width: 100%;
 
   & > * {
@@ -43,6 +43,7 @@ export default {
     white-space: nowrap;
     width: fit-content;
     justify-content: space-around;
+    font-size: 1.5rem;
     
     & > :not(:last-child) {
       margin-right: .5rem;

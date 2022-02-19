@@ -93,9 +93,15 @@ form {
   justify-content: center;
 
   & > h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: white;
     margin-bottom: 1.3rem;
+    text-transform: uppercase;
+
+    @media (min-width: 768px) {
+      font-size: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
   }
 
   & input {
@@ -129,9 +135,16 @@ form {
     cursor: pointer;
 
     background-color: #21262d;
-    color: #c9d1d9;
-    border: 1px solid #f0f6fc1a;
-    border-radius: 20px;
+    color: #64ffda;
+    border: 1px solid #64ffda;
+    border-radius: 5px;
+    
+    transition: all .3s;
+
+    &:hover {
+      background-color: #64ffda1a;
+      box-shadow: 0 0 30px hsl(215deg 30% 23%);
+    }
   }
 }
 </style>
