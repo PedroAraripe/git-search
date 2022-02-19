@@ -4,6 +4,7 @@
       v-for="i in 10"
       :key="i"
       class="mv-text"
+      :class="{ reverse: !!(i % 2) }"
       :names="vueContributorsNames"
     />
   </div>

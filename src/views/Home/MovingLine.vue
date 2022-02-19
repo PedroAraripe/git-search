@@ -53,17 +53,31 @@ export default {
       width: 100%;
     }
   }
-}
+  &.reverse {
+    .line1 {
+      animation: loop-animate-reverse 80s linear infinite;
+      animation-delay: -40s;
+    }
+  
+    .line2 {
+      position: absolute;
+      animation: loop-animate-reverse 80s linear infinite;
+      animation-delay: -80s;
+    }
+  }
 
-.line1 {
-  animation: loop-animate 80s linear infinite;
-  animation-delay: -40s;
-}
-
-.line2 {
-  position: absolute;
-  animation: loop-animate2 80s linear infinite;
-  animation-delay: -80s;
+  &:not(.reverse) {
+    .line1 {
+      animation: loop-animate 80s linear infinite;
+      animation-delay: -40s;
+    }
+  
+    .line2 {
+      position: absolute;
+      animation: loop-animate 80s linear infinite;
+      animation-delay: -80s;
+    }
+  }
 }
 
 @keyframes loop-animate {
@@ -76,13 +90,13 @@ export default {
   }
 }
 
-@keyframes loop-animate2 {
+@keyframes loop-animate-reverse {
   0% {
-    transform: translateX(100%);
+    transform: translateX(-100%);
   }
 
   100% {
-    transform: translateX(-100%);
+    transform: translateX(100%);
   }
 }
 </style>
