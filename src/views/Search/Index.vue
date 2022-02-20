@@ -1,22 +1,20 @@
 <template>
   <div class="search-page">
-    <LeftInfos v-if="user" :user="user" />
-    <div>
-      <div v-if="user">
-        <div v-for="repo in userRepos" :key="repo.id">
-          <ProjectCard :project="repo" />
-        </div>
+    <!-- <LeftInfos v-if="user" :user="user" /> -->
+    <div v-if="userRepos" class="repos">
+      <div v-for="repo in userRepos" :key="repo.id">
+        <ProjectCard :project="repo" />
       </div>
     </div>
   </div>
 </template>
 <script>
-import LeftInfos from "./components/LeftInfos.vue";
+// import LeftInfos from "./components/LeftInfos.vue";
 import ProjectCard from "./components/ProjectCard.vue";
 
 export default {
   components: {
-    LeftInfos,
+    // LeftInfos,
     ProjectCard,
   },
   data() {
@@ -49,10 +47,22 @@ export default {
   display: flex;
 
   color: white;
-  background-color: black;
+  background-color: #161b22;
 
   & h1 {
     margin-top: 0;
+  }
+
+  & .repos {
+    width: 100%;
+
+    & > * {
+      border-top: 1px solid #2d3932;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+    }
   }
 }
 </style>
