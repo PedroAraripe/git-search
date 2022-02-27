@@ -1,6 +1,6 @@
 <template>
   <div class="search-page">
-    <!-- <LeftInfos v-if="user" :user="user" /> -->
+    <UserInfos v-if="user" :user="user" />
     <div v-if="userRepos" class="repos">
       <div v-for="repo in userRepos" :key="repo.id">
         <ProjectCard :project="repo" />
@@ -9,12 +9,12 @@
   </div>
 </template>
 <script>
-// import LeftInfos from "./components/LeftInfos.vue";
+import UserInfos from "./components/UserInfos.vue";
 import ProjectCard from "./components/ProjectCard.vue";
 
 export default {
   components: {
-    // LeftInfos,
+    UserInfos,
     ProjectCard,
   },
   data() {
@@ -44,10 +44,14 @@ export default {
 <style lang="scss" scoped>
 .search-page {
   min-height: 100vh;
-  display: flex;
-
+  
   color: white;
   background-color: #161b22;
+
+  @media (min-width: 992px) {
+   display: flex;
+  }
+
 
   & h1 {
     margin-top: 0;

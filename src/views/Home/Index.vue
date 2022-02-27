@@ -5,7 +5,7 @@
       <CardWrapperLogin class="card-wrapper-login">
         <form @submit.prevent="fetchUser">
           <h1>Search for a git login name</h1>
-          <div>
+          <div class="wrapper-inputs">
             <input v-model="search" type="text" required />
             <button>Search</button>
           </div>
@@ -32,11 +32,11 @@ export default {
     vueContributorsNames() {
       return this.$store.state.vueContributorsNames;
     },
-    hasVueContributorsNames(){
-      return this.vueContributorsNames?.length > 0; 
-    }
+    hasVueContributorsNames() {
+      return this.vueContributorsNames?.length > 0;
+    },
   },
-  created(){
+  created() {
     this.fetchVueContributors();
   },
   methods: {
@@ -53,14 +53,14 @@ export default {
     },
     fetchUser() {
       this.$store
-        .dispatch("fetchUser",this.search)
+        .dispatch("fetchUser", this.search)
         .then(this.sendToSearchPage)
         .catch(() => console.log("Nonexistent account"));
       // .then(this.getUserRepos);
     },
-    fetchVueContributors(){
+    fetchVueContributors() {
       this.$store.dispatch("fetchVueContributors");
-    }
+    },
   },
 };
 </script>
@@ -100,58 +100,77 @@ form {
   align-items: center;
   justify-content: center;
 
+  padding: 1rem;
+
+  & * {
+    font-family: "Vollkorn", serif;
+  }
+
   & > h1 {
     font-size: 2rem;
-    color: white;
-    margin-bottom: 1.3rem;
+    color: #aeeac9;
+    margin-bottom: 2.3rem;
     text-transform: uppercase;
 
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
       font-size: 2.5rem;
+      margin-bottom: 1.3rem;
+    }
+  }
+
+  & .wrapper-inputs {
+    width: 100%;
+
+    @media (min-width: 992px) {
+      display: flex;
+    }
+
+    & input {
+      width: 80%;
+
+      padding: 1rem;
       margin-bottom: 2.5rem;
+
+      border: 1px solid #aeeac9;
+      outline: none;
+      border-radius: 10px;
+      background-color: #323644;
+      color: #aeeac9;
+
+      @media (min-width: 992px) {
+        flex-grow: 1;
+        min-width: 300px;
+        margin-right: 2rem;
+        margin-bottom: 0rem;
+        font-size: 20px;
+      }
     }
-  }
 
-  & input {
-    height: 3rem;
-    width: 80%;
+    & button {
+      min-width: 150px;
 
-    @media (min-width: 768px) {
-      min-width: 300px;
-      max-width: 50%;
-      margin-right: 2rem;
-    }
+      padding: 1rem 2rem;
+      font-size: 1rem;
 
-    padding: 1rem;
-    margin-bottom: 2.5rem;
+      font-weight: bold;
 
-    border: none;
-    outline: none;
-    border-radius: 10px;
-    background-color: #323644;
-    color: ghostwhite;
-  }
+      cursor: pointer;
 
-  & button {
-    min-width: 150px;
+      background-color: #21262d;
+      color: #63e99f;
+      border: 1px solid #63e99f;
+      border-radius: 5px;
 
-    padding: 1rem 2rem;
-    font-size: 1rem;
+      transition: all 0.3s;
 
-    font-weight: bold;
+      @media (min-width: 992px) {
+        font-size: 20px;
+      }
 
-    cursor: pointer;
-
-    background-color: #21262d;
-    color: #64ffda;
-    border: 1px solid #64ffda;
-    border-radius: 5px;
-    
-    transition: all .3s;
-
-    &:hover {
-      background-color: #2d534a;
-      box-shadow: 0 0 30px hsl(215deg 30% 23%);
+      &:hover {
+        background-color: #2d534a;
+        box-shadow: 0 0 30px hsl(215deg 30% 23%);
+      }
     }
   }
 }

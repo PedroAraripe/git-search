@@ -1,18 +1,15 @@
 <template>
   <div class="line-wrapper">
     <div class="line1">
-      <span v-for="(name, i) in names" :key="i">
-        {{name}}
+      <span v-for="(name, i) in names" :key="i" @click="copyToClipBoard">
+        {{ name }}
       </span>
     </div>
     <div class="line2">
-      <span v-for="(name, i) in names" :key="i">
-        {{name}}
+      <span v-for="(name, i) in names" :key="i" @click="copyToClipBoard">
+        {{ name }}
       </span>
     </div>
-    <!-- <div class="line2">
-      {{ names.join(" ") }}
-    </div> -->
   </div>
 </template>
 <script>
@@ -28,6 +25,11 @@ export default {
       return this.names.join(" ");
     },
   },
+  methods: {
+    copyToClipBoard(e){
+      navigator.clipboard.writeText(e.target.innerText);
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -39,26 +41,49 @@ export default {
 
   & > * {
     display: flex;
-    padding-right: .5rem;
+    padding-right: 0.5rem;
     white-space: nowrap;
     width: fit-content;
     justify-content: space-around;
     font-size: 1.5rem;
-    
+
+    font-family: "Shippori Antique B1", sans-serif;
+
     & > :not(:last-child) {
-      margin-right: 1rem;
+      padding-right: 1rem;
     }
-    
+
     @media (min-width: 768px) {
       width: 100%;
     }
   }
+
+  & > * > * {
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      color: #63e99f;
+      transform: translate(10px, -5px);
+    }
+  }
+
   &.reverse {
+    & > * > * {
+      transition: all 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        color: #63e99f;
+        transform: translate(-10px, -5px);
+      }
+    }
+
     .line1 {
       animation: loop-animate-reverse 80s linear infinite;
       animation-delay: -40s;
     }
-  
+
     .line2 {
       position: absolute;
       animation: loop-animate-reverse 80s linear infinite;
@@ -71,7 +96,7 @@ export default {
       animation: loop-animate 80s linear infinite;
       animation-delay: -40s;
     }
-  
+
     .line2 {
       position: absolute;
       animation: loop-animate 80s linear infinite;

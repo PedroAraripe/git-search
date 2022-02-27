@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper-card-project">
-    <h3 class="title">
+    <a class="title" :href="projectUrl" target="_blank" rel="noreferrer">
       {{ project.name }}
-    </h3>
+    </a>
     <p v-if="project.description" class="description">
       {{ project.description }}
     </p>
@@ -24,6 +24,13 @@ export default {
   },
   components: {
     Topic,
+  },
+  computed: {
+    projectUrl() {
+      return this.project.homepage?.length
+        ? this.project.homepage
+        : this.project.html_url;
+    },
   },
 };
 </script>
