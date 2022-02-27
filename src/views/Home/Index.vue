@@ -3,10 +3,18 @@
     <main>
       <MovingText v-if="hasVueContributorsNames" class="moving-texts" />
       <CardWrapperLogin class="card-wrapper-login">
-        <form @submit.prevent="fetchUser">
+        <form
+          @submit.prevent="fetchUser"
+          :class="{ 'no-user-found': userNotFound }"
+        >
           <h1>Search for a git login name</h1>
           <div class="wrapper-inputs">
-            <input v-model="search" type="text" required />
+            <input
+              v-model="search"
+              type="text"
+              required
+              :placeholder="`${userNotFound ? 'Sorry ! User not found.' : ''}`"
+            />
             <button>Search</button>
           </div>
         </form>
@@ -26,6 +34,7 @@ export default {
   data() {
     return {
       search: "",
+      userNotFound: false,
     };
   },
   computed: {
@@ -55,7 +64,10 @@ export default {
       this.$store
         .dispatch("fetchUser", this.search)
         .then(this.sendToSearchPage)
-        .catch(() => console.log("Nonexistent account"));
+        .catch(() => {
+          this.userNotFound = true;
+          this.search = "";
+        });
       // .then(this.getUserRepos);
     },
     fetchVueContributors() {
@@ -167,6 +179,24 @@ form {
         background-color: #2d534a;
         box-shadow: 0 0 30px hsl(215deg 30% 23%);
       }
+    }
+  }
+
+  &.no-user-found {
+    & ::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #e33636;
+      opacity: 1; /* Firefox */
+    }
+
+    & :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: #e33636;
+    }
+
+    & ::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: #e33636;
     }
   }
 }
