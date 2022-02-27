@@ -102,10 +102,6 @@ form {
 
   padding: 1rem;
 
-  & * {
-    font-family: "Vollkorn", serif;
-  }
-
   & > h1 {
     font-size: 2rem;
     color: #aeeac9;
