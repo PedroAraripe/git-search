@@ -1,11 +1,18 @@
 <template>
   <div class="search-page">
+    <div v-if="!user" class="no-user">
+      <div>Sorry ! User not found.</div>
+      <br>
+      <div>Try again.</div>
+    </div>
+
     <UserInfos v-if="user" :user="user" />
     <div v-if="userRepos" class="repos">
       <div v-for="repo in userRepos" :key="repo.id">
         <ProjectCard :project="repo" />
       </div>
     </div>
+
   </div>
 </template>
 <script>
@@ -26,7 +33,6 @@ export default {
     if (!this.user && this.$route.query.name) {
       this.$store.dispatch("fetchUser", this.$route.query.name);
     }
-
   },
   computed: {
     userNameShowing() {
@@ -44,14 +50,13 @@ export default {
 <style lang="scss" scoped>
 .search-page {
   min-height: 100vh;
-  
+
   color: white;
   background-color: #161b22;
 
   @media (min-width: 992px) {
-   display: flex;
+    display: flex;
   }
-
 
   & h1 {
     margin-top: 0;
@@ -67,6 +72,19 @@ export default {
       margin-left: 1.5rem;
       margin-right: 1.5rem;
     }
+  }
+
+  & .no-user {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: #63e99f;
+    font-size: 20px;
   }
 }
 </style>
