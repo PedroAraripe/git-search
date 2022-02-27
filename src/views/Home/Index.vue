@@ -119,8 +119,10 @@ form {
     color: #aeeac9;
     margin-bottom: 2.3rem;
     text-transform: uppercase;
+    text-align: center;
 
     @media (min-width: 992px) {
+      text-align: start;
       font-size: 2.5rem;
       margin-bottom: 1.3rem;
     }
@@ -129,12 +131,16 @@ form {
   & .wrapper-inputs {
     width: 100%;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     @media (min-width: 992px) {
-      display: flex;
+      flex-direction: row;
     }
 
     & input {
-      width: 80%;
+      width: 100%;
 
       padding: 1rem;
       margin-bottom: 2.5rem;
@@ -155,7 +161,7 @@ form {
     }
 
     & button {
-      min-width: 150px;
+      width: 100%;
 
       padding: 1rem 2rem;
       font-size: 1rem;
@@ -172,6 +178,7 @@ form {
       transition: all 0.3s;
 
       @media (min-width: 992px) {
+        width: fit-content;
         font-size: 20px;
       }
 

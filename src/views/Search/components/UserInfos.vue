@@ -60,11 +60,12 @@ export default {
 
   display: flex;
   flex-direction: column;
-  padding: 1rem 1rem 5rem 0;
+  padding: 1rem 0 5rem 0;
   margin-left: 1.5rem;
+  margin-right: 1.5rem;
 
   @media (min-width: 992px) {
-    padding: 2rem 0 2rem 2rem;
+    padding: 2rem 0 0 2rem;
     margin-left: 0rem;
     min-height: fit-content;
   }
@@ -82,6 +83,9 @@ export default {
   }
 
   & .user-img {
+    display: flex;
+    justify-content: center;
+
     & * {
       border-radius: 50%;
     }
