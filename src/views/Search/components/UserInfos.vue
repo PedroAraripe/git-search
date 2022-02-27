@@ -1,6 +1,21 @@
 <template>
   <div class="wrapper-infos">
-    <img class="user-img" :src="user.avatar_url" alt="" />
+    <div class="user-img">
+      <img
+        height="200"
+        width="200"
+        class="user-img-mobile"
+        :src="user.avatar_url"
+        alt=""
+      />
+      <img
+        height="300"
+        width="300"
+        class="user-img-desktop"
+        :src="user.avatar_url"
+        alt=""
+      />
+    </div>
     <div class="infos">
       <h2 class="name">
         {{ user.name }}
@@ -32,7 +47,6 @@
   </div>
 </template>
 <script>
-
 export default {
   computed: {
     user() {
@@ -43,14 +57,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 .wrapper-infos {
-  min-height: 100vh;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 1rem 1rem 5rem 0;
+  margin-left: 1.5rem;
 
   @media (min-width: 992px) {
     padding: 2rem 0 2rem 2rem;
+    margin-left: 0rem;
     min-height: fit-content;
   }
 
@@ -66,17 +81,23 @@ export default {
     font-size: 0.9rem;
   }
 
-  padding: 1rem;
-
   & .user-img {
-    border-radius: 50%;
-    margin: 2rem 0;
+    & * {
+      border-radius: 50%;
+    }
 
-    width: 200px;
+    & .user-img-mobile {
+      @media (min-width: 992px) {
+        display: none;
+      }
+    }
 
-    @media (min-width: 992px) {
-      width: 80%;
-      margin: 0;
+    & .user-img-desktop {
+      display: none;
+
+      @media (min-width: 992px) {
+        display: block;
+      }
     }
   }
 
