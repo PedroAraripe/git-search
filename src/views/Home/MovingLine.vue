@@ -28,6 +28,12 @@ export default {
   methods: {
     copyToClipBoard(e){
       navigator.clipboard.writeText(e.target.innerText);
+
+      this.$toasted.show("Copied username to clipboard", { 
+        theme: "toasted-primary", 
+        position: "bottom-left", 
+        duration : 2000
+      });
     }
   }
 };
