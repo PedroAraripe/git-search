@@ -13,3 +13,14 @@ a {
     text-decoration: none;
     color: black;
 }
+
+.wrapper-toasted {
+    &.success {
+        font-family: "Shippori Antique B1", sans-serif;
+        
+        &, & * {
+            color: #0b331d !important;
+            text-shadow: 0 0 black;
+        }
+    }
+}

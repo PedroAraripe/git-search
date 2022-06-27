@@ -29,10 +29,11 @@ export default {
     copyToClipBoard(e){
       navigator.clipboard.writeText(e.target.innerText);
 
-      this.$toasted.show("Copied username to clipboard", { 
+      this.$toasted.success("Copied username to clipboard", { 
         theme: "toasted-primary", 
         position: "bottom-left", 
-        duration : 2000
+        duration : 2500,
+        className: "wrapper-toasted"
       });
     }
   }
