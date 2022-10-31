@@ -13,7 +13,11 @@
               v-model="search"
               type="text"
               required
-              :placeholder="`${userNotFound ? 'Sorry ! User not found.' : ''}`"
+              :placeholder="`${
+                userNotFound
+                  ? 'Sorry ! User not found.'
+                  : 'example: PedroAraripe'
+              }`"
             />
             <button>Search</button>
           </div>
@@ -33,7 +37,7 @@ export default {
   },
   data() {
     return {
-      search: "",
+      search: "PedroAraripe",
       userNotFound: false,
     };
   },
